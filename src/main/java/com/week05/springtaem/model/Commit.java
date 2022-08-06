@@ -1,10 +1,12 @@
 package com.week05.springtaem.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -32,4 +34,8 @@ public class Commit {
 	@JoinColumn(name = "COMMENT_ID")
 	@JsonBackReference
 	private Comment comment;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<Like> likeList;
 }

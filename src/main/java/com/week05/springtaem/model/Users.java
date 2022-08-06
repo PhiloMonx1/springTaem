@@ -34,6 +34,10 @@ public class Users {
 	@JsonManagedReference
 	private List<Commit> commitList;
 
+	@OneToMany(mappedBy = "users")
+	@JsonManagedReference
+	private List<Like> likeList;
+
 	public Users(String username, String password) {
 		this.username = username;
 		this.password = password;

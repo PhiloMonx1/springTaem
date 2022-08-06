@@ -26,6 +26,7 @@ public class Post {
 	@Column(nullable = false)
 	private String content;
 
+	private int commentCount = 0;
 	private int like = 0;
 
 	@ManyToOne()
@@ -36,4 +37,8 @@ public class Post {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private List<Comment> commentList;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<Like> likeList;
 }
