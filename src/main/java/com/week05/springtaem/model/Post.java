@@ -18,13 +18,15 @@ public class Post {
 	private Long id;
 
 	@Column(nullable = false)
-	private String name;
+	private String userWriter;
 
 	@Column(nullable = false)
 	private String title;
 
 	@Column(nullable = false)
 	private String content;
+
+	private int like = 0;
 
 	@ManyToOne()
 	@JoinColumn(name = "USERNAME")
