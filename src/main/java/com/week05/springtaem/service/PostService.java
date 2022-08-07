@@ -74,6 +74,7 @@ public class PostService {
 				.orElseThrow(()-> new IllegalArgumentException("잘못된 사용자입니다. 다시 로그인 후 시도해주세요."));
 
 		user.removePost(post);
+
 		postRepository.delete(post);
 		return postId + "번 게시물 삭제완료.";
 	}
