@@ -74,25 +74,19 @@ public class CommentService {
 	}
 
 	public String deleteComment(Long commentId, UsernameDto usernameDto) {
-		System.out.println("===================1===================");
 		System.out.println(usernameDto.getUsername());
 		Users user = userRepository.findById(usernameDto.getUsername())
 				.orElseThrow(() -> new NullPointerException("존재하지 않는 사용자입니다."));
 
-		System.out.println("===================2===================");
 		Comment comment = commentRepository.findById(commentId)
 				.orElseThrow(()-> new NullPointerException("해당 아이디가 존재하지 않습니다."));
 
-		System.out.println("===================3===================");
 		Post post = postRepository.findById(comment.getPost().getId())
 				.orElseThrow(()-> new NullPointerException("해당 아이디가 존재하지 않습니다."));
 
-		System.out.println("===================4===================");
 		user.removeComment(comment);
-		System.out.println("===================5===================");
 		post.removeComment(comment);
 
-		System.out.println("===================6===================");
 		commentRepository.delete(comment);
 		return commentId + "번 댓글 삭제 완료";
 	}

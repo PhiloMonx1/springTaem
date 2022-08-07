@@ -44,7 +44,6 @@ public class CommentController {
 
 	@DeleteMapping("/auth/comment/{commentId}")
 	public String deleteComment(@PathVariable Long commentId, @RequestBody UsernameDto usernameDto) {
-		System.out.println("===================0===================");
 		return commentService.deleteComment(commentId, usernameDto);
 	}
 }
