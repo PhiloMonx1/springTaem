@@ -50,5 +50,12 @@ public class Users {
 		this.postList.remove(post);
 	}
 
+	public void addComment(Comment comment){
+		this.commentList.add(comment);
+	}
+	public void removeComment (Comment comment){
+		this.commentList.remove(comment);
+	}
+
 }
 

@@ -3,10 +3,11 @@ package com.week05.springtaem.model.dto;
 import com.week05.springtaem.model.Comment;
 import com.week05.springtaem.model.Commit;
 import com.week05.springtaem.model.Post;
+import lombok.Getter;
 
 import java.util.List;
 
-
+@Getter
 public class UserResponseDto {
 	private String username;
 

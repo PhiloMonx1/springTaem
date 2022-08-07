@@ -43,6 +43,12 @@ public class Post extends Timestamped{
 	@JsonManagedReference
 	private List<Likes> likesList;
 
+	public Post(PostRequestDto postRequestDto, Users users) {
+		this.userWriter = users.getUsername();
+		this.title = postRequestDto.getTitle();
+		this.content = postRequestDto.getContent();
+	}
+
 	public void setLikeCnt(int likeCnt) {
 		this.likeCnt = likeCnt;
 	}
@@ -56,9 +62,10 @@ public class Post extends Timestamped{
 		this.content = postRequestDto.getContent();
 	}
 
-	public Post(PostRequestDto postRequestDto, Users users) {
-		this.userWriter = users.getUsername();
-		this.title = postRequestDto.getTitle();
-		this.content = postRequestDto.getContent();
+	public void addComment(Comment comment) {
+		this.commentList.add(comment);
+	}
+	public void removeComment(Comment comment) {
+		this.commentList.remove(comment);
 	}
 }

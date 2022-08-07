@@ -1,5 +1,8 @@
 package com.week05.springtaem.model.dto;
 
+import lombok.Getter;
+
+@Getter
 public class CommitResponseDto {
 
 	private Long id;
