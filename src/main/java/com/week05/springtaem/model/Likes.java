@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Like {
+public class Likes {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,8 +3,6 @@ package com.week05.springtaem.model.dto;
 import lombok.Getter;
 
 @Getter
-public class PostRequestDto {
+public class UsernameDto {
 	private String username;
-	private String title;
-	private String content;
 }

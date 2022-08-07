@@ -23,7 +23,7 @@ public class Commit {
 	@Column(nullable = false)
 	private String content;
 
-	private int like = 0;
+	private int likes = 0;
 
 	@ManyToOne
 	@JoinColumn(name = "USERNAME")
@@ -37,5 +37,5 @@ public class Commit {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonManagedReference
-	private List<Like> likeList;
+	private List<Likes> likesList;
 }

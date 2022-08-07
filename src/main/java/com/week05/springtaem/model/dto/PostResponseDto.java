@@ -1,15 +1,31 @@
 package com.week05.springtaem.model.dto;
 
-import com.week05.springtaem.model.Comment;
+import com.week05.springtaem.model.Post;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
+@Getter
+@NoArgsConstructor
 public class PostResponseDto {
 
+	private LocalDateTime createdAt;
+
+	private LocalDateTime modifiedAt;
 	private Long id;
 	private String userWriter;
 	private String title;
-	private String content;
-	private int like = 0;
-	private List<Comment> commentList;
+	private int likeCnt = 0;
+	private int commentCnt = 0;
+
+	public PostResponseDto(Post post) {
+		this.createdAt = post.getCreatedAt();
+		this.modifiedAt = post.getModifiedAt();
+		this.id = post.getId();
+		this.userWriter = post.getUserWriter();
+		this.title = post.getTitle();
+		this.likeCnt = post.getLikesList().size();
+		this.commentCnt = post.getCommentList().size();
+	}
 }

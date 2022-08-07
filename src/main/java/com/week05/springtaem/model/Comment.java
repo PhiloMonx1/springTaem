@@ -24,7 +24,7 @@ public class Comment {
 	private String content;
 
 	private int commitCount = 0;
-	private int like = 0;
+	private int likes = 0;
 	@ManyToOne()
 	@JoinColumn(name = "USERNAME")
 	@JsonBackReference
@@ -41,5 +41,5 @@ public class Comment {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonManagedReference
-	private List<Like> likeList;
+	private List<Likes> likesList;
 }

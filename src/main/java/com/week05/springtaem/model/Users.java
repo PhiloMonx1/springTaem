@@ -36,11 +36,19 @@ public class Users {
 
 	@OneToMany(mappedBy = "users")
 	@JsonManagedReference
-	private List<Like> likeList;
+	private List<Likes> likesList;
 
 	public Users(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
+
+	public void addPost(Post post){
+		this.postList.add(post);
+	}
+	public void removePost (Post post){
+		this.postList.remove(post);
+	}
+
 }
 

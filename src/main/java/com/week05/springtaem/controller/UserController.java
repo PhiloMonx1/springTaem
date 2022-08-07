@@ -1,11 +1,13 @@
 package com.week05.springtaem.controller;
 
+import com.week05.springtaem.model.Users;
+import com.week05.springtaem.model.dto.UserRequestDto;
 import com.week05.springtaem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/user")
 public class UserController {
 
 	private final UserService userService;
@@ -15,8 +17,13 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@PostMapping
-	public void signUp(){
+	@GetMapping("{username}")
+	public Users readUser(@PathVariable String username){
+		return userService.readUser(username);
+	}
 
+	@PostMapping("/signup")
+	public String signUp(@RequestBody UserRequestDto userRequestDto){
+		return userService.signUp(userRequestDto);
 	}
 }
