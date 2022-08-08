@@ -34,7 +34,7 @@ public class PostController {
 		return postService.creatPost(postRequestDto);
 	}
 
-	@PutMapping("/auth/post/{postId}")
+	@PatchMapping("/auth/post/{postId}")
 	public Post updatePost(@PathVariable Long postId, @RequestBody PostRequestDto postRequestDto){
 		return postService.updatePost(postId, postRequestDto);
 	}

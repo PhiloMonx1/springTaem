@@ -4,5 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class CommitRequestDto {
+	private String username;
 	private String content;
 }

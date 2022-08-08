@@ -57,7 +57,7 @@ public class Post extends Timestamped{
 		this.commentCnt = commentCnt;
 	}
 
-	public void update(PostRequestDto postRequestDto){
+	public void updatePost(PostRequestDto postRequestDto){
 		this.title = postRequestDto.getTitle();
 		this.content = postRequestDto.getContent();
 	}

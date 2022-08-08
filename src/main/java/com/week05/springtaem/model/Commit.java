@@ -2,6 +2,7 @@ package com.week05.springtaem.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.week05.springtaem.model.dto.CommitRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -38,4 +39,15 @@ public class Commit {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private List<Likes> likesList;
+
+	public Commit(CommitRequestDto commitRequestDto, Comment comment, Users users) {
+		this.userWriter = users.getUsername();
+		this.content = commitRequestDto.getContent();
+		this.comment = comment;
+		this.users = users;
+	}
+
+	public void updateCommit(CommitRequestDto commitRequestDto){
+		this.content = commitRequestDto.getContent();
+	}
 }

@@ -59,14 +59,14 @@ public class Comment {
 		this.commitCount = commitCount;
 	}
 
-	public void update(CommentRequestDto commentRequestDto){
+	public void updateComment(CommentRequestDto commentRequestDto){
 		this.content = commentRequestDto.getContent();
 	}
+
+	public void addCommit(Commit commit) {
+		this.commitList.add(commit);
+	}
+	public void removeCommit(Commit commit) {
+		this.commitList.remove(commit);
+	}
 }
-
-
-
-
-
-
-

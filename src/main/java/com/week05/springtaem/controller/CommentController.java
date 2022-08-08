@@ -1,7 +1,6 @@
 package com.week05.springtaem.controller;
 
 import com.week05.springtaem.model.Comment;
-import com.week05.springtaem.model.Post;
 import com.week05.springtaem.model.dto.CommentRequestDto;
 import com.week05.springtaem.model.dto.CommentResponseDto;
 import com.week05.springtaem.model.dto.UsernameDto;
@@ -9,7 +8,6 @@ import com.week05.springtaem.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.*;
 import java.util.List;
 
 @RestController
@@ -27,17 +25,17 @@ public class CommentController {
 		return commentService.readAllComment(postId);
 	}
 
-	@GetMapping("/comments/{postId}/{commentId}")
-	public Comment readComment(@PathVariable Long postId, @PathVariable Long commentId) {
+	@GetMapping("/comment/{commentId}")
+	public Comment readComment(@PathVariable Long commentId) {
 		return commentService.readComment(commentId);
 	}
 
-	@PostMapping("/auth/post/{postId}")
+	@PostMapping("/auth/comment/{postId}")
 	public Comment creatComment(@PathVariable Long postId, @RequestBody CommentRequestDto commentRequestDto) {
 		return commentService.creatComment(postId, commentRequestDto);
 	}
 
-	@PutMapping("/auth/comment/{commentId}")
+	@PatchMapping("/auth/comment/{commentId}")
 	public Comment updateComment(@PathVariable Long commentId, @RequestBody CommentRequestDto commentRequestDto) {
 		return commentService.updateComment(commentId, commentRequestDto);
 	}

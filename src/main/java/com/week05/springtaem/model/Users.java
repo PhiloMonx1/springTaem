@@ -57,5 +57,12 @@ public class Users {
 		this.commentList.remove(comment);
 	}
 
+	public void addCommit(Commit commit){
+		this.commitList.add(commit);
+	}
+	public void removeCommit (Commit commit){
+		this.commitList.remove(commit);
+	}
+
 }
 

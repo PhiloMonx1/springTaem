@@ -36,7 +36,7 @@ public class PostService {
 
 	public Post readPost(Long postId) {
 		Post post = postRepository.findById(postId)
-				.orElseThrow(() -> new IllegalArgumentException("해당 아이디가 존재하지 않습니다."));
+				.orElseThrow(() -> new IllegalArgumentException("해당 게시물이 존재하지 않습니다."));
 
 		post.setLikeCnt(post.getLikesList().size());
 		post.setCommentCount(post.getCommentList().size());
@@ -57,18 +57,15 @@ public class PostService {
 	@Transactional
 	public Post updatePost(Long postId, PostRequestDto postRequestDto) {
 		Post post = postRepository.findById(postId)
-				.orElseThrow(() -> new IllegalArgumentException("해당 아이디가 존재하지 않습니다."));
+				.orElseThrow(() -> new IllegalArgumentException("해당 게시물이 존재하지 않습니다."));
 
-		Users user = userRepository.findById(postRequestDto.getUsername())
-				.orElseThrow(()-> new IllegalArgumentException("잘못된 사용자입니다. 다시 로그인 후 시도해주세요."));
-
-		post.update(postRequestDto);
+		post.updatePost(postRequestDto);
 		return post;
 	}
 
 	public String deletePost(Long postId, UsernameDto usernameDto) {
 		Post post = postRepository.findById(postId)
-				.orElseThrow(() -> new IllegalArgumentException("해당 아이디가 존재하지 않습니다."));
+				.orElseThrow(() -> new IllegalArgumentException("해당 게시물이 존재하지 않습니다."));
 
 		Users user = userRepository.findById(usernameDto.getUsername())
 				.orElseThrow(()-> new IllegalArgumentException("잘못된 사용자입니다. 다시 로그인 후 시도해주세요."));

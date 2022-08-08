@@ -30,6 +30,7 @@ public class CommentService {
 
 	public List<CommentResponseDto> readAllComment(Long postId) {
 		List<Comment> commentList = commentRepository.findAllByPost_Id(postId);
+
 		List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
 
 		for(Comment comment : commentList){
@@ -41,7 +42,7 @@ public class CommentService {
 
 	public Comment readComment(Long commentId) {
 		Comment comment = commentRepository.findById(commentId)
-				.orElseThrow(() -> new NullPointerException("해당 아이디가 존재하지 않습니다."));
+				.orElseThrow(() -> new NullPointerException("해당 댓글이 존재하지 않습니다."));
 
 		comment.setLikeCount(comment.getLikesList().size());
 		comment.setCommitCount(comment.getCommitList().size());
@@ -54,7 +55,7 @@ public class CommentService {
 				.orElseThrow(() -> new NullPointerException("존재하지 않는 사용자입니다."));
 
 		Post post = postRepository.findById(postId)
-				.orElseThrow(()-> new NullPointerException("해당 아이디가 존재하지 않습니다."));
+				.orElseThrow(()-> new NullPointerException("해당 게시물이 존재하지 않습니다."));
 
 		Comment comment = new Comment(commentRequestDto, post, user);
 
@@ -69,7 +70,7 @@ public class CommentService {
 	public Comment updateComment(Long commentId, CommentRequestDto commentRequestDto) {
 		Comment comment = commentRepository.findById(commentId)
 				.orElseThrow(()-> new NullPointerException("해당 아이디가 존재하지 않습니다."));
-		comment.update(commentRequestDto);
+		comment.updateComment(commentRequestDto);
 		return comment;
 	}
 
@@ -79,10 +80,10 @@ public class CommentService {
 				.orElseThrow(() -> new NullPointerException("존재하지 않는 사용자입니다."));
 
 		Comment comment = commentRepository.findById(commentId)
-				.orElseThrow(()-> new NullPointerException("해당 아이디가 존재하지 않습니다."));
+				.orElseThrow(()-> new NullPointerException("해당 댓글이 존재하지 않습니다."));
 
 		Post post = postRepository.findById(comment.getPost().getId())
-				.orElseThrow(()-> new NullPointerException("해당 아이디가 존재하지 않습니다."));
+				.orElseThrow(()-> new NullPointerException("해당 게시물이 존재하지 않습니다."));
 
 		user.removeComment(comment);
 		post.removeComment(comment);
