@@ -1,7 +1,6 @@
 package com.week05.springtaem.controller;
 
 import com.week05.springtaem.model.dto.MypageDto;
-import com.week05.springtaem.model.dto.UsernameDto;
 import com.week05.springtaem.service.MypageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +19,8 @@ public class MypageController {
 	}
 
 	@GetMapping("/auth/mypage/{userId}")
-	public MypageDto readMypage(@PathVariable Long userId, UsernameDto usernameDto){
-		return mypageService.readMypage(userId, usernameDto);
+	public MypageDto readMypage(@PathVariable String userId){
+		return mypageService.readMypage(userId);
 	}
 
 }

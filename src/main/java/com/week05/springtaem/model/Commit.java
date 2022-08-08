@@ -41,11 +41,11 @@ public class Commit extends Timestamped{
 	private int likeCnt;
 
 
-	public Commit(CommitRequestDto commitRequestDto, Comment comment, Users users) {
-		this.userWriter = users.getUsername();
+	public Commit(CommitRequestDto commitRequestDto, Comment comment, Users user) {
+		this.userWriter = user.getUsername();
 		this.content = commitRequestDto.getContent();
 		this.comment = comment;
-		this.users = users;
+		this.users = user;
 	}
 
 	public void setLikeCnt(int likeCnt) {

@@ -46,11 +46,11 @@ public class Comment extends Timestamped{
 	private int commitCnt;
 	private int likeCnt;
 
-	public Comment(CommentRequestDto commentRequestDto, Post post, Users users) {
-		this.userWriter = users.getUsername();
+	public Comment(CommentRequestDto commentRequestDto, Post post, Users user) {
+		this.userWriter = user.getUsername();
 		this.content = commentRequestDto.getContent();
 		this.post = post;
-		this.users = users;
+		this.users = user;
 	}
 
 	public void setLikeCnt(int likeCnt) {
