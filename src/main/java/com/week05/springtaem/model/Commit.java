@@ -2,19 +2,17 @@ package com.week05.springtaem.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.week05.springtaem.model.dto.CommitRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class Commit {
+public class Commit extends Timestamped{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

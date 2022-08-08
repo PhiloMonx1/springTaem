@@ -2,6 +2,7 @@ package com.week05.springtaem.service;
 
 import com.week05.springtaem.model.Users;
 import com.week05.springtaem.model.dto.UserRequestDto;
+import com.week05.springtaem.model.dto.UserResponseDto;
 import com.week05.springtaem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,9 +33,10 @@ public class UserService {
 		}else return "비밀번호가 일치하지 않습니다.";
 	}
 
-	public Users readUser(String username) {
-		return userRepository.findById(username)
+	public UserResponseDto readUser(String username) {
+		Users findUser = userRepository.findById(username)
 				.orElseThrow(() -> new NullPointerException("존재하지 않는 사용자입니다."));
+		return new UserResponseDto(findUser);
 	}
 }
 

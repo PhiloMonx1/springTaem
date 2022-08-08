@@ -2,6 +2,7 @@ package com.week05.springtaem.controller;
 
 import com.week05.springtaem.model.Users;
 import com.week05.springtaem.model.dto.UserRequestDto;
+import com.week05.springtaem.model.dto.UserResponseDto;
 import com.week05.springtaem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class UserController {
 	}
 
 	@GetMapping("{username}")
-	public Users readUser(@PathVariable String username){
+	public UserResponseDto readUser(@PathVariable String username){
 		return userService.readUser(username);
 	}
 

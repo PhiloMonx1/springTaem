@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Users {
+public class Users extends Timestamped{
 
 	@Id
 	@Column(nullable = false, unique = true)

@@ -1,6 +1,5 @@
 package com.week05.springtaem.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

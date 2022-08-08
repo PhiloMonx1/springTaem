@@ -9,15 +9,13 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 public class PostResponseDto {
-
 	private LocalDateTime createdAt;
-
 	private LocalDateTime modifiedAt;
 	private Long id;
 	private String userWriter;
 	private String title;
-	private int likeCnt = 0;
-	private int commentCnt = 0;
+	private int likeCnt;
+	private int commentCnt;
 
 	public PostResponseDto(Post post) {
 		this.createdAt = post.getCreatedAt();
