@@ -41,13 +41,8 @@ public class CommentService {
 	}
 
 	public Comment readComment(Long commentId) {
-		Comment comment = commentRepository.findById(commentId)
+		return commentRepository.findById(commentId)
 				.orElseThrow(() -> new NullPointerException("해당 댓글이 존재하지 않습니다."));
-
-		comment.setLikeCount(comment.getLikesList().size());
-		comment.setCommitCount(comment.getCommitList().size());
-
-		return comment;
 	}
 
 	public Comment creatComment(Long postId, CommentRequestDto commentRequestDto) {
@@ -61,6 +56,7 @@ public class CommentService {
 
 		user.addComment(comment);
 		post.addComment(comment);
+		post.setCommentCount(post.getCommentList().size());
 
 		commentRepository.save(comment);
 		return comment;
@@ -87,6 +83,7 @@ public class CommentService {
 
 		user.removeComment(comment);
 		post.removeComment(comment);
+		post.setCommentCount(post.getCommentList().size());
 
 		commentRepository.delete(comment);
 		return commentId + "번 댓글 삭제 완료";

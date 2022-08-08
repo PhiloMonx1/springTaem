@@ -38,14 +38,14 @@ public class Comment {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonManagedReference
-	private List<Commit> commitList = new ArrayList<>();
+	private List<Commit> commitList;
 
 	@OneToMany(mappedBy = "comment", orphanRemoval = true)
 	@JsonIgnore
-	private List<Likes> likesList = new ArrayList<>();
+	private List<Likes> likesList;
 
-	private int commitCnt = commitList.size();
-	private int likeCnt = likesList.size();
+	private int commitCnt;
+	private int likeCnt;
 
 	public Comment(CommentRequestDto commentRequestDto, Post post, Users users) {
 		this.userWriter = users.getUsername();
@@ -54,10 +54,10 @@ public class Comment {
 		this.users = users;
 	}
 
-	public void setLikeCount(int likeCnt) {
+	public void setLikeCnt(int likeCnt) {
 		this.likeCnt = likeCnt;
 	}
-	public void setCommitCount(int commitCnt) {
+	public void setCommitCnt(int commitCnt) {
 		this.commitCnt = commitCnt;
 	}
 

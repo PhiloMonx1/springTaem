@@ -35,13 +35,8 @@ public class PostService {
 	}
 
 	public Post readPost(Long postId) {
-		Post post = postRepository.findById(postId)
+		return postRepository.findById(postId)
 				.orElseThrow(() -> new IllegalArgumentException("해당 게시물이 존재하지 않습니다."));
-
-		post.setLikeCnt(post.getLikesList().size());
-		post.setCommentCount(post.getCommentList().size());
-
-		return post;
 	}
 
 	public Post creatPost(PostRequestDto postRequestDto) {

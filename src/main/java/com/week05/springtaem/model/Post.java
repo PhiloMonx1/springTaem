@@ -36,14 +36,14 @@ public class Post extends Timestamped{
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonManagedReference
-	private List<Comment> commentList = new ArrayList<>();
+	private List<Comment> commentList;
 
 	@OneToMany(mappedBy = "post", orphanRemoval = true)
 	@JsonIgnore
-	private List<Likes> likesList = new ArrayList<>();
+	private List<Likes> likesList;
 
-	private int likeCnt = likesList.size();
-	private int commentCnt = commentList.size();
+	private int likeCnt;
+	private int commentCnt;
 
 	public Post(PostRequestDto postRequestDto, Users users) {
 		this.userWriter = users.getUsername();

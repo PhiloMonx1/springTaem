@@ -38,9 +38,9 @@ public class Commit {
 
 	@OneToMany(mappedBy = "commit", orphanRemoval = true)
 	@JsonIgnore
-	private List<Likes> likesList = new ArrayList<>();
+	private List<Likes> likesList;
 
-	private int likeCnt = likesList.size();
+	private int likeCnt;
 
 
 	public Commit(CommitRequestDto commitRequestDto, Comment comment, Users users) {

@@ -32,12 +32,8 @@ public class CommitService {
 	}
 
 	public Commit readCommit(Long commitId) {
-		Commit commit = commitRepository.findById(commitId)
+		return commitRepository.findById(commitId)
 				.orElseThrow(() -> new NullPointerException("해당 대댓글이 존재하지 않습니다."));
-
-		commit.setLikeCnt(commit.getLikesList().size());
-
-		return commit;
 	}
 
 	public Commit creatCommit(Long commentId, CommitRequestDto commitRequestDto) {
@@ -50,6 +46,7 @@ public class CommitService {
 		Commit commit = new Commit(commitRequestDto, comment,user);
 
 		comment.addCommit(commit);
+		comment.setCommitCnt(comment.getCommitList().size());
 		user.addCommit(commit);
 
 		commitRepository.save(commit);
@@ -77,6 +74,7 @@ public class CommitService {
 				.orElseThrow(() -> new NullPointerException("존재하지 않는 사용자입니다."));
 
 		comment.removeCommit(commit);
+		comment.setCommitCnt(comment.getCommitList().size());
 		user.removeCommit(commit);
 
 		commitRepository.delete(commit);
