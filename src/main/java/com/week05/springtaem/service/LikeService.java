@@ -1,12 +1,12 @@
 package com.week05.springtaem.service;
 
-import com.week05.springtaem.model.Likes;
-import com.week05.springtaem.model.Post;
-import com.week05.springtaem.model.Users;
+import com.week05.springtaem.model.*;
 import com.week05.springtaem.model.dto.UsernameDto;
 import com.week05.springtaem.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Service
 public class LikeService {
@@ -25,7 +25,7 @@ public class LikeService {
 	}
 
 
-
+	@Transactional
 	public String postLike(Long postId, UsernameDto usernameDto) {
 		Users user = userRepository.findById(usernameDto.getUsername())
 				.orElseThrow(() -> new NullPointerException("존재하지 않는 사용자입니다."));
@@ -37,18 +37,56 @@ public class LikeService {
 			Likes like = new Likes(user, post);
 			user.addLikes(like);
 			post.addLikes(like);
-			likeRepository.save(like);
 			return post.getId() + "번 게시물 좋아요";
 		}else  {
 			Likes like = likeRepository.findByUsersAndPost(user, post);
 			user.removeLikes(like);
 			post.removeLikes(like);
-			likeRepository.delete(like);
 			return post.getId() + "번 게시물 좋아요 취소";
 		}
 	}
 
 
+	@Transactional
+	public String commentLike(Long commentId, UsernameDto usernameDto) {
+		Users user = userRepository.findById(usernameDto.getUsername())
+				.orElseThrow(() -> new NullPointerException("존재하지 않는 사용자입니다."));
+		Comment comment = commentRepository.findById(commentId)
+				.orElseThrow(()-> new NullPointerException("해당 댓글이 존재하지 않습니다."));
+
+
+		if(likeRepository.findByUsersAndComment(user, comment) == null){
+			Likes like = new Likes(user, comment);
+			user.addLikes(like);
+			comment.addLikes(like);
+			return comment.getId() + "번 댓글 좋아요";
+		}else  {
+			Likes like = likeRepository.findByUsersAndComment(user, comment);
+			user.removeLikes(like);
+			comment.removeLikes(like);
+			return comment.getId() + "번 댓글 좋아요 취소";
+		}
+	}
+	@Transactional
+	public String commitLike(Long commitId, UsernameDto usernameDto) {
+		Users user = userRepository.findById(usernameDto.getUsername())
+				.orElseThrow(() -> new NullPointerException("존재하지 않는 사용자입니다."));
+		Commit commit = commitRepository.findById(commitId)
+				.orElseThrow(()-> new NullPointerException("해당 대댓글이 존재하지 않습니다."));
+
+
+		if(likeRepository.findByUsersAndCommit(user, commit) == null){
+			Likes like = new Likes(user, commit);
+			user.addLikes(like);
+			commit.addLikes(like);
+			return commit.getId() + "번 대댓글 좋아요";
+		}else  {
+			Likes like = likeRepository.findByUsersAndCommit(user, commit);
+			user.removeLikes(like);
+			commit.removeLikes(like);
+			return commit.getId() + "번 게시물 좋아요 취소";
+		}
+	}
 }
 
 

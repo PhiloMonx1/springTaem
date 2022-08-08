@@ -1,12 +1,14 @@
 package com.week05.springtaem.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.week05.springtaem.model.dto.CommentRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -24,8 +26,6 @@ public class Comment {
 	@Column(nullable = false)
 	private String content;
 
-	private int likeCount = 0;
-	private int commitCount = 0;
 	@ManyToOne()
 	@JoinColumn(name = "USERNAME")
 	@JsonBackReference
@@ -38,11 +38,14 @@ public class Comment {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonManagedReference
-	private List<Commit> commitList;
+	private List<Commit> commitList = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JsonManagedReference
-	private List<Likes> likesList;
+	@OneToMany(mappedBy = "comment", orphanRemoval = true)
+	@JsonIgnore
+	private List<Likes> likesList = new ArrayList<>();
+
+	private int commitCnt = commitList.size();
+	private int likeCnt = likesList.size();
 
 	public Comment(CommentRequestDto commentRequestDto, Post post, Users users) {
 		this.userWriter = users.getUsername();
@@ -51,11 +54,11 @@ public class Comment {
 		this.users = users;
 	}
 
-	public void setLikeCount(int likeCount) {
-		this.likeCount = likeCount;
+	public void setLikeCount(int likeCnt) {
+		this.likeCnt = likeCnt;
 	}
-	public void setCommitCount(int commitCount) {
-		this.commitCount = commitCount;
+	public void setCommitCount(int commitCnt) {
+		this.commitCnt = commitCnt;
 	}
 
 	public void updateComment(CommentRequestDto commentRequestDto){

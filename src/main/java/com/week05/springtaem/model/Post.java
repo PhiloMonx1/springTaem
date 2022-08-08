@@ -1,12 +1,14 @@
 package com.week05.springtaem.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.week05.springtaem.model.dto.PostRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -27,9 +29,6 @@ public class Post extends Timestamped{
 	@Column(nullable = false)
 	private String content;
 
-	private int likeCnt = 0;
-	private int commentCnt = 0;
-
 	@ManyToOne()
 	@JoinColumn(name = "USERNAME")
 	@JsonBackReference
@@ -37,11 +36,14 @@ public class Post extends Timestamped{
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonManagedReference
-	private List<Comment> commentList;
+	private List<Comment> commentList = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JsonManagedReference
-	private List<Likes> likesList;
+	@OneToMany(mappedBy = "post", orphanRemoval = true)
+	@JsonIgnore
+	private List<Likes> likesList = new ArrayList<>();
+
+	private int likeCnt = likesList.size();
+	private int commentCnt = commentList.size();
 
 	public Post(PostRequestDto postRequestDto, Users users) {
 		this.userWriter = users.getUsername();

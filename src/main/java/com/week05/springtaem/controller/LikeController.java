@@ -19,4 +19,14 @@ public class LikeController {
 		return likeService.postLike(postId, usernameDto);
 	}
 
+	@PostMapping("/auth/comment/like/{commentId}")
+	private String commentLike(@PathVariable Long commentId, @RequestBody UsernameDto usernameDto){
+		return likeService.commentLike(commentId, usernameDto);
+	}
+
+	@PostMapping("/auth/commit/like/{commitId}")
+	private String commitLike(@PathVariable Long commitId, @RequestBody UsernameDto usernameDto){
+		return likeService.commitLike(commitId, usernameDto);
+	}
+
 }

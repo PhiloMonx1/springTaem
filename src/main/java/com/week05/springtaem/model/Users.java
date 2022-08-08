@@ -35,7 +35,7 @@ public class Users {
 	private List<Commit> commitList;
 
 	@OneToMany(mappedBy = "users")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<Likes> likesList;
 
 	public Users(String username, String password) {

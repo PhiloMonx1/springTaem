@@ -17,22 +17,18 @@ public class Likes {
 
 	@ManyToOne
 	@JoinColumn(name = "USERNAME")
-	@JsonBackReference
 	private Users users;
 
 	@ManyToOne
 	@JoinColumn(name = "POST_ID")
-	@JsonBackReference
 	private Post post;
 
 	@ManyToOne
 	@JoinColumn(name = "COMMENT_ID")
-	@JsonBackReference
 	private Comment comment;
 
 	@ManyToOne
 	@JoinColumn(name = "COMMIT_ID")
-	@JsonBackReference
 	private Commit commit;
 
 	public void setUsers(Users users) {this.users = users;}

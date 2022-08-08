@@ -32,8 +32,12 @@ public class CommitService {
 	}
 
 	public Commit readCommit(Long commitId) {
-		return commitRepository.findById(commitId)
-				.orElseThrow(()-> new NullPointerException("해당 대댓글이 존재하지 않습니다."));
+		Commit commit = commitRepository.findById(commitId)
+				.orElseThrow(() -> new NullPointerException("해당 대댓글이 존재하지 않습니다."));
+
+		commit.setLikeCnt(commit.getLikesList().size());
+
+		return commit;
 	}
 
 	public Commit creatCommit(Long commentId, CommitRequestDto commitRequestDto) {
