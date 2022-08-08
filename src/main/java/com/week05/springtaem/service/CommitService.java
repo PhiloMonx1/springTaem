@@ -28,15 +28,7 @@ public class CommitService {
 
 	public List<Commit> readAllCommit(Long commentId) {
 		System.out.println(commentId);
-		List<Commit> allByCommentId = commitRepository.findAllByComment_Id(commentId);
-		System.out.println(allByCommentId.size());
-		for(int i=0; i<allByCommentId.size(); i++){
-			System.out.println(i+"번 시작");
-			System.out.println(allByCommentId.get(i).getId());
-			System.out.println(allByCommentId.get(i).getUserWriter());
-			System.out.println(allByCommentId.get(i).getContent());
-		}
-		return allByCommentId;
+		return commitRepository.findAllByComment_Id(commentId);
 	}
 
 	public Commit readCommit(Long commitId) {

@@ -52,7 +52,6 @@ public class Post extends Timestamped{
 	public void setLikeCnt(int likeCnt) {
 		this.likeCnt = likeCnt;
 	}
-
 	public void setCommentCount(int commentCnt) {
 		this.commentCnt = commentCnt;
 	}
@@ -67,5 +66,12 @@ public class Post extends Timestamped{
 	}
 	public void removeComment(Comment comment) {
 		this.commentList.remove(comment);
+	}
+
+	public void addLikes(Likes likes){
+		this.likesList.add(likes);
+	}
+	public void removeLikes(Likes likes){
+		this.likesList.remove(likes);
 	}
 }

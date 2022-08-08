@@ -64,5 +64,11 @@ public class Users {
 		this.commitList.remove(commit);
 	}
 
+	public void addLikes(Likes likes){
+		this.likesList.add(likes);
+	}
+	public void removeLikes(Likes likes){
+		this.likesList.remove(likes);
+	}
 }
 

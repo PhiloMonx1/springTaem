@@ -54,7 +54,6 @@ public class Comment {
 	public void setLikeCount(int likeCount) {
 		this.likeCount = likeCount;
 	}
-
 	public void setCommitCount(int commitCount) {
 		this.commitCount = commitCount;
 	}
@@ -68,5 +67,12 @@ public class Comment {
 	}
 	public void removeCommit(Commit commit) {
 		this.commitList.remove(commit);
+	}
+
+	public void addLikes(Likes likes){
+		this.likesList.add(likes);
+	}
+	public void removeLikes(Likes likes){
+		this.likesList.remove(likes);
 	}
 }

@@ -50,4 +50,11 @@ public class Commit {
 	public void updateCommit(CommitRequestDto commitRequestDto){
 		this.content = commitRequestDto.getContent();
 	}
+
+	public void addLikes(Likes likes){
+		this.likesList.add(likes);
+	}
+	public void removeLikes(Likes likes){
+		this.likesList.remove(likes);
+	}
 }

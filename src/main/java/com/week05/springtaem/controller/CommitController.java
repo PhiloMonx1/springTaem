@@ -19,8 +19,6 @@ public class CommitController {
 
 	@GetMapping("/commits/{commentId}")
 	public List<Commit> readAllCommit(@PathVariable Long commentId){
-		System.out.println(commentId);
-		System.out.println("=========");
 		return commitService.readAllCommit(commentId);
 	}
 
