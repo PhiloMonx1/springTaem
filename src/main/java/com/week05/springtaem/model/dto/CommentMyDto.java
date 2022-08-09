@@ -7,7 +7,7 @@ import lombok.Getter;
 public class CommentMyDto {
 	private final String content;
 	private final int likeCnt;
-	private final int commentCnt;
+	private  int commentCnt;
 
 	public CommentMyDto(Comment comment) {
 		this.content = comment.getContent();

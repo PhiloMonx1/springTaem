@@ -6,8 +6,6 @@ import com.week05.springtaem.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-
 @Service
 public class LikeService {
 	private final LikeRepository likeRepository;
@@ -30,7 +28,6 @@ public class LikeService {
 				.orElseThrow(() -> new NullPointerException("존재하지 않는 사용자입니다."));
 		Post post = postRepository.findById(postId)
 				.orElseThrow(()-> new NullPointerException("해당 게시물이 존재하지 않습니다."));
-
 
 		if(likeRepository.findByUsersAndPost(user, post) == null){
 			Likes like = new Likes(user, post);
@@ -56,7 +53,6 @@ public class LikeService {
 		Comment comment = commentRepository.findById(commentId)
 				.orElseThrow(()-> new NullPointerException("해당 댓글이 존재하지 않습니다."));
 
-
 		if(likeRepository.findByUsersAndComment(user, comment) == null){
 			Likes like = new Likes(user, comment);
 			user.addLikes(like);
@@ -79,7 +75,6 @@ public class LikeService {
 				.orElseThrow(() -> new NullPointerException("존재하지 않는 사용자입니다."));
 		Commit commit = commitRepository.findById(commitId)
 				.orElseThrow(()-> new NullPointerException("해당 대댓글이 존재하지 않습니다."));
-
 
 		if(likeRepository.findByUsersAndCommit(user, commit) == null){
 			Likes like = new Likes(user, commit);

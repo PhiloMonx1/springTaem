@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor
-@Entity
+@Entity(name = "ARTICLE")
 public class Post extends Timestamped{
 
 	@Id
@@ -36,6 +36,7 @@ public class Post extends Timestamped{
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private List<Comment> commentList;
+
 
 	@OneToMany(mappedBy = "post", orphanRemoval = true)
 	@JsonIgnore

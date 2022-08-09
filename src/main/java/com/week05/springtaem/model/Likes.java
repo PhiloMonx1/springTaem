@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
-@Entity
+@Entity(name = "HEART")
 public class Likes {
 
 	@Id

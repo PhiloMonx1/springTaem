@@ -54,6 +54,7 @@ public class CommentService {
 
 		Comment comment = new Comment(commentRequestDto, post, user);
 
+
 		user.addComment(comment);
 		post.addComment(comment);
 		post.setCommentCount(post.getCommentList().size());
@@ -87,5 +88,6 @@ public class CommentService {
 
 		commentRepository.delete(comment);
 		return commentId + "번 댓글 삭제 완료";
+
 	}
 }

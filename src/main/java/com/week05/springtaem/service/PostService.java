@@ -2,6 +2,7 @@ package com.week05.springtaem.service;
 
 import com.week05.springtaem.model.Post;
 import com.week05.springtaem.model.Users;
+import com.week05.springtaem.model.dto.CommentMyDto;
 import com.week05.springtaem.model.dto.PostRequestDto;
 import com.week05.springtaem.model.dto.PostResponseDto;
 import com.week05.springtaem.model.dto.UsernameDto;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -31,6 +33,7 @@ public class PostService {
 		for(Post post : postList){
 			postResponseDtoList.add(new PostResponseDto(post));
 		}
+
 		return postResponseDtoList;
 	}
 
