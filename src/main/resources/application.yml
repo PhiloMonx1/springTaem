@@ -18,3 +18,34 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+
+profiles:
+  include:
+    - aws
+    - credentials
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+logging:
+  level:
+    com.tutorial: debug
+
+cloud:
+  aws:
+    s3:
+      bucket:
+    region:
+      static:
+    credentials:
+      #            accessKey: 1234
+      #            secretKey: 1234
+
+      accessKey:
+      secretKey:
+
+    stack:
+      auto =false:
