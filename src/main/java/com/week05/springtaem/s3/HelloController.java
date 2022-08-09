@@ -1,6 +1,5 @@
-package com.week05.springtaem.controller;
+package com.week05.springtaem.s3;
 
-import com.week05.springtaem.s3.S3Uploader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +9,7 @@ import java.io.IOException;
 
 @RequiredArgsConstructor
 @RestController
-public class ImgController {
+public class HelloController {
 
 	private final S3Uploader s3Uploader;
 

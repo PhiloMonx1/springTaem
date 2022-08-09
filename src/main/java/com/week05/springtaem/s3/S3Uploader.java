@@ -5,7 +5,6 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +22,6 @@ public class S3Uploader {
 
 	private final AmazonS3 amazonS3;
 
-	@Autowired
 	public S3Uploader(AmazonS3 amazonS3) {
 		this.amazonS3 = amazonS3;
 	}
@@ -34,15 +32,19 @@ public class S3Uploader {
 	public String upload(MultipartFile multipartFile) throws IOException {
 		File uploadFile = convert(multipartFile)  // 파일 변환할 수 없으면 에러
 				.orElseThrow(() -> new IllegalArgumentException("MultipartFile -> 파일 변환 실패"));
+
 		return uploadToS3(uploadFile);
 	}
 
 	// S3로 파일 업로드하기
 	@Transactional
 	public String uploadToS3(File uploadFile) throws IOException {
-		String fileName =  UUID.randomUUID() + uploadFile.getName();   // S3에 저장된 파일 이름
+
+		String fileName = UUID.randomUUID() + uploadFile.getName();   // S3에 저장된 파일 이름
 		String uploadImageUrl = putS3(uploadFile, fileName); // s3로 업로드
 		removeNewFile(uploadFile);
+
+
 		return fileName;
 	}
 
@@ -64,17 +66,17 @@ public class S3Uploader {
 	// 로컬에 파일 업로드 하기
 	private Optional<File> convert(MultipartFile file) throws IOException {
 		File convertFile = new File(System.getProperty("user.dir") + "/" + file.getOriginalFilename());     // 현재 프로젝트 절대경로
-		if (convertFile.createNewFile()) {                                  // 바로 위에서 지정한 경로에 File이 생성됨 (경로가 잘못되었다면 생성 불가능)
-			return Optional.of(convertFile);
-		}
-		return Optional.empty();
+		// 바로 위에서 지정한 경로에 File이 생성됨 (경로가 잘못되었다면 생성 불가능)
+		convertFile.createNewFile();
+		return Optional.of(convertFile);
 	}
 
+
 	public void remove(String filename) {
+
+
 		DeleteObjectRequest request = new DeleteObjectRequest(bucket, filename);
 		amazonS3.deleteObject(request);
 
 	}
 }
-
-
