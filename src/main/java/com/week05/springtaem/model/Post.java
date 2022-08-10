@@ -28,6 +28,8 @@ public class Post extends Timestamped{
 	@Column(nullable = false)
 	private String content;
 
+	private String imgUrl;
+
 	@ManyToOne()
 	@JoinColumn(name = "USERNAME")
 	@JsonBackReference
@@ -52,6 +54,9 @@ public class Post extends Timestamped{
 		this.users = user;
 	}
 
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 	public void setLikeCnt(int likeCnt) {
 		this.likeCnt = likeCnt;
 	}

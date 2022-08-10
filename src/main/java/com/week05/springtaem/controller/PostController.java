@@ -41,9 +41,9 @@ public class PostController {
 		return postService.creatPost(postRequestDto);
 	}
 
-	@PostMapping("/auth/post/image")
-	public String upload( MultipartFile multipartFile, String dirName) throws IOException {
-		return s3Uploader.upload(multipartFile, "post") + " 등록 완료.";
+	@PostMapping("/auth/post/image/{postId}")
+	public String upload(@PathVariable Long postId, MultipartFile multipartFile, String dirName) throws IOException {
+		return s3Uploader.upload(postId, multipartFile, "img") + " 등록 완료.";
 	}
 
 	@PatchMapping("/auth/post/{postId}")
