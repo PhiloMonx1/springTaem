@@ -52,8 +52,8 @@ public class S3Uploader {
 		String url = amazonS3Client.getUrl(bucket, fileName).toString();
 
 		ImgUrl imgUrl = new ImgUrl(url, post);
+		System.out.println(imgUrl.getUrl());
 		post.addImgurl(imgUrl);
-
 		s3Repository.save(imgUrl);
 
 		return url;
