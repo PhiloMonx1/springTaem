@@ -28,8 +28,6 @@ public class Post extends Timestamped{
 	@Column(nullable = false)
 	private String content;
 
-	private String imgUrl;
-
 	@ManyToOne()
 	@JoinColumn(name = "USERNAME")
 	@JsonBackReference
@@ -44,6 +42,9 @@ public class Post extends Timestamped{
 	@JsonIgnore
 	private List<Likes> likesList;
 
+	@OneToMany(mappedBy = "post", orphanRemoval = true)
+	private List<ImgUrl> imgUrlList;
+
 	private int likeCnt;
 	private int commentCnt;
 
@@ -54,9 +55,6 @@ public class Post extends Timestamped{
 		this.users = user;
 	}
 
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
-	}
 	public void setLikeCnt(int likeCnt) {
 		this.likeCnt = likeCnt;
 	}
@@ -81,5 +79,9 @@ public class Post extends Timestamped{
 	}
 	public void removeLikes(Likes likes){
 		this.likesList.remove(likes);
+	}
+
+	public void addImgurl(ImgUrl imgUrl){
+		this.imgUrlList.add(imgUrl);
 	}
 }

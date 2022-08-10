@@ -3,6 +3,7 @@ package com.week05.springtaem.s3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.week05.springtaem.model.ImgUrl;
 import com.week05.springtaem.model.Post;
 import com.week05.springtaem.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class S3Uploader {
 
 	private final AmazonS3Client amazonS3Client;
 	private final PostRepository postRepository;
+	private final S3Repository s3Repository;
 
 	@Value("${cloud.aws.s3.bucket}")
 	private String bucket;
@@ -45,10 +47,15 @@ public class S3Uploader {
 	private String putS3(Long postId, File uploadFile, String fileName) {
 		Post post = postRepository.findById(postId)
 				.orElseThrow(() -> new IllegalArgumentException("해당 게시물이 존재하지 않습니다."));
+
 		amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
 		String url = amazonS3Client.getUrl(bucket, fileName).toString();
-		post.setImgUrl(url);
-		postRepository.save(post);
+
+		ImgUrl imgUrl = new ImgUrl(url, post);
+		post.addImgurl(imgUrl);
+
+		s3Repository.save(imgUrl);
+
 		return url;
 	}
 
